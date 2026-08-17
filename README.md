@@ -30,6 +30,18 @@ automates everything up to the click: finding, filtering, drafting. A human revi
 submits — optionally in an assisted Claude session (Claude fills the forms in the
 applicant's logged-in browser; the human confirms each submit).
 
+## Watching status
+
+- **`tracker.md`** — source of truth: one row per posting with status
+  (`new / applied / interview / offer / rejected / skip`).
+- **`dashboard.html`** — the tracker rendered as a status board (counts + filterable
+  table). Self-contained; attached to every morning's email, so the newest email always
+  carries the current board. It is a local file, not a hosted link — share it by sending
+  the file, not a path.
+- **Updating a status** — reply to any scout email with lines like `applied: Deloitte`,
+  `interview: FLEX Capital`, `skip: FUTRUE`; the next run applies them. (Or edit
+  `tracker.md` directly.)
+
 ## How to adjust it
 
 Everything tunable lives in **`routine-prompt.md`** — roles/keywords, location, email
@@ -50,8 +62,9 @@ lands.
   `routine-prompt.md`, then open Claude Code in the folder and say:
   *"Set up the daily scheduled task described in routine-prompt.md."*
   Requirements: Claude desktop app + a connected Gmail connector.
-- The repo is designed so nothing personal is committed — safe to share as a private
-  GitHub repo with collaborators, or even publicly.
+- CVs and cover-letter drafts are gitignored, but `tracker.md` (application statuses) is
+  committed — so share the repo itself only privately with collaborators; for handing the
+  blueprint to strangers, share just `README.md` + `routine-prompt.md`.
 
 ## History / design notes
 

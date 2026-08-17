@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job Hunt Dashboard</title>
+<style>
+  :root{
+    --bg:#f7f7f5; --surface:#ffffff; --ink:#1a1a18; --ink-2:#5c5c56; --ink-3:#8a8a82;
+    --line:#e4e4df; --accent:#4a6bd6;
+    --b-new-bg:#e8edfb;  --b-new-ink:#2c4bb0;
+    --b-applied-bg:#ece7f8; --b-applied-ink:#5b3fa8;
+    --b-interview-bg:#fdf0d7; --b-interview-ink:#8a5a00;
+    --b-offer-bg:#e0f2e4; --b-offer-ink:#186236;
+    --b-rejected-bg:#eeeeea; --b-rejected-ink:#6b6b64;
+    --b-skip-bg:#eeeeea; --b-skip-ink:#8a8a82;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#191917; --surface:#232320; --ink:#ecece6; --ink-2:#a8a8a0; --ink-3:#7c7c74;
+      --line:#3a3a35; --accent:#8ba3ec;
+      --b-new-bg:#26324f; --b-new-ink:#a9bdf5;
+      --b-applied-bg:#332a4d; --b-applied-ink:#c3b2ee;
+      --b-interview-bg:#453516; --b-interview-ink:#eec883;
+      --b-offer-bg:#1d3a27; --b-offer-ink:#93d3a8;
+      --b-rejected-bg:#31312d; --b-rejected-ink:#9b9b93;
+      --b-skip-bg:#31312d; --b-skip-ink:#84847c;
+    }
+  }
+  *{box-sizing:border-box} html,body{margin:0}
+  body{background:var(--bg); color:var(--ink);
+       font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; padding:28px 20px 48px}
+  .wrap{max-width:1000px; margin:0 auto}
+  h1{font-size:22px; margin:0 0 2px} .sub{color:var(--ink-2); font-size:13px; margin:0 0 22px}
+  .tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin-bottom:22px}
+  .tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px}
+  .tile .n{font-size:26px; font-weight:650; letter-spacing:-.02em}
+  .tile .l{font-size:12px; color:var(--ink-2); margin-top:2px}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px}
+  .chip{border:1px solid var(--line); background:var(--surface); color:var(--ink-2); border-radius:999px;
+        padding:5px 12px; font-size:13px; cursor:pointer}
+  .chip.on{border-color:var(--accent); color:var(--ink); font-weight:600}
+  .tablebox{background:var(--surface); border:1px solid var(--line); border-radius:10px; overflow-x:auto}
+  table{border-collapse:collapse; width:100%; min-width:720px; font-size:14px}
+  th{color:var(--ink-3); font-size:11px; text-transform:uppercase; letter-spacing:.06em; text-align:left;
+     padding:10px 12px; border-bottom:1px solid var(--line)}
+  td{padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.co{font-weight:600; white-space:nowrap} td.loc,td.found{color:var(--ink-2); white-space:nowrap}
+  a{color:var(--accent); text-decoration:none} a:hover{text-decoration:underline}
+  .badge{display:inline-block; border-radius:6px; padding:2px 8px; font-size:12px; font-weight:600; white-space:nowrap}
+  .s-new{background:var(--b-new-bg); color:var(--b-new-ink)}
+  .s-applied{background:var(--b-applied-bg); color:var(--b-applied-ink)}
+  .s-interview{background:var(--b-interview-bg); color:var(--b-interview-ink)}
+  .s-offer{background:var(--b-offer-bg); color:var(--b-offer-ink)}
+  .s-rejected{background:var(--b-rejected-bg); color:var(--b-rejected-ink)}
+  .s-skip{background:var(--b-skip-bg); color:var(--b-skip-ink); text-decoration:line-through}
+  .foot{color:var(--ink-2); font-size:13px; margin-top:20px; line-height:1.6}
+  .foot code{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:1px 5px; font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Job hunt — status board</h1>
+  <p class="sub" id="updated"></p>
+  <div class="tiles" id="tiles"></div>
+  <div class="chips" id="chips"></div>
+  <div class="tablebox"><table>
+    <thead><tr><th>Status</th><th>Role</th><th>Company</th><th>Location</th><th>Found</th><th>Notes</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+  <p class="foot">
+    <strong>To update a status:</strong> reply to any “Job scout” email with lines like
+    <code>applied: Deloitte</code>, <code>interview: FLEX Capital</code>, <code>rejected: WWF</code>,
+    <code>skip: FUTRUE</code> — the next morning’s run applies them and sends a fresh board.<br>
+    This scout finds and drafts; it never submits applications.
+  </p>
+</div>
+
+<script id="data" type="application/json">
+{"updated":"2026-08-17",
+ "rows":[
+  {"found":"2026-08-17","title":"Werkstudent (w/m/d) Data Science & AI","company":"FLEX Capital","loc":"Berlin","status":"new","notes":"","url":"https://de.linkedin.com/jobs/view/werkstudent-w-m-d-data-science-ai-at-flex-capital-4450130660"},
+  {"found":"2026-08-17","title":"Werkstudent:in Data Science","company":"nerou GmbH","loc":"Berlin","status":"new","notes":"","url":"https://de.linkedin.com/jobs/view/werkstudent-in-data-science-at-nerou-gmbh-4452779365"},
+  {"found":"2026-08-17","title":"Working Student – Product Data & Analytics","company":"Redcare Pharmacy","loc":"Berlin","status":"new","notes":"","url":"https://de.linkedin.com/jobs/view/working-student-product-data-analytics-at-redcare-pharmacy-4440454775"},
+  {"found":"2026-08-17","title":"Praktikum Associate Consultant Data Science (m/w/d)","company":"Simon-Kucher","loc":"Berlin","status":"new","notes":"","url":"https://de.linkedin.com/jobs/view/praktikum-associate-consultant-data-science-m-w-d-at-simon-kucher-4405117922"},
+  {"found":"2026-08-17","title":"Praktikant Data Analytics – Financial Services (m/w/d)","company":"Deloitte","loc":"Berlin","status":"new","notes":"","url":"https://de.linkedin.com/jobs/view/praktikant-data-analytics-financial-services-industry-m-w-d-in-berlin-at-deloitte-4443921680"},
+  {"found":"2026-08-17","title":"Studentische:r Mitarbeiter:in (d/w/m) Agentische KI","company":"Charité Berlin","loc":"Berlin","status":"new","notes":"","url":"https://de.linkedin.com/jobs/view/studentische-mitarbeiterin-studentischer-mitarbeiter-d-w-m-agentische-ki-at-charite-universit%C3%A4tsmedizin-berlin-4454564672"},
+  {"found":"2026-08-17","title":"Werkstudent*in Klimafreundliche Busse (Data Analysis)","company":"NOW GmbH","loc":"Berlin","status":"new","notes":"","url":"https://de.linkedin.com/jobs/view/werkstudent-in-klimafreundliche-busse-data-analysis-at-now-gmbh-4452930564"},
+  {"found":"2026-08-17","title":"Junior Research & Insights Manager (w/m/d)","company":"We Are Social","loc":"Berlin","status":"new","notes":"","url":"https://de.linkedin.com/jobs/view/junior-research-insights-manager-w-m-d-at-we-are-social-4413415278"},
+  {"found":"2026-08-17","title":"Technical Consultant Digital Analytics (Junior) (m/w/d)","company":"mohrstade","loc":"Potsdam","status":"new","notes":"","url":"https://de.linkedin.com/jobs/view/technical-consultant-digital-analytics-junior-m-w-d-potsdam-at-mohrstade-4452256255"},
+  {"found":"2026-08-17","title":"Junior Analyst (m/w/d) – Customer Analytics","company":"flaschenpost SE","loc":"Berlin (hybrid)","status":"new","notes":"","url":"https://de.indeed.com/viewjob?jk=b5d305b0dbf7d16c"},
+  {"found":"2026-08-17","title":"Werkstudent*in Data & AI Solutions Engineering","company":"Mercedes-Benz Group","loc":"Berlin (hybrid)","status":"new","notes":"","url":"https://de.indeed.com/viewjob?jk=632563d8351a7d31"},
+  {"found":"2026-08-17","title":"Werkstudent Audit Capture & AI Solutions (m/w/d)","company":"Deloitte","loc":"Berlin","status":"new","notes":"","url":"https://de.indeed.com/viewjob?jk=cb948e0792f72346"},
+  {"found":"2026-08-17","title":"Studentischer Mitarbeiter Datenmanagement (m/w/d)","company":"WWF","loc":"Berlin","status":"new","notes":"","url":"https://de.indeed.com/viewjob?jk=e93879e32f2784e8"},
+  {"found":"2026-08-17","title":"Werkstudent – Risikomanagement / Nachhaltigkeitsrisiken (ML)","company":"Sparkassen Rating","loc":"Berlin (hybrid)","status":"new","notes":"","url":"https://de.indeed.com/viewjob?jk=d04fbbf7cca85bb0"},
+  {"found":"2026-08-17","title":"Junior Data Analyst & Data Operations Specialist (m/f/d)","company":"REPA","loc":"Bergkirchen","status":"new","notes":"verify remote claim","url":"https://de.linkedin.com/jobs/view/junior-data-analyst-data-operations-specialist-m-f-d-at-repa-4449867212"},
+  {"found":"2026-08-17","title":"(Junior) Data Analyst (m/w/d)","company":"MONTANA","loc":"Grünwald","status":"new","notes":"verify remote claim","url":"https://de.linkedin.com/jobs/view/junior-data-analyst-m-w-d-at-montana-4450458428"},
+  {"found":"2026-08-17","title":"(Junior) Manager Sales Data Analyst","company":"FUTRUE","loc":"Munich","status":"new","notes":"verify remote claim","url":"https://de.linkedin.com/jobs/view/junior-manager-sales-data-analyst-at-futrue-4431958348"},
+  {"found":"2026-08-17","title":"Junior Marketing Analyst (f/m/d)","company":"GMX, WEB.DE & mail.com","loc":"Karlsruhe","status":"new","notes":"verify remote claim","url":"https://de.linkedin.com/jobs/view/junior-marketing-analyst-f-m-d-fixed-term-of-one-year-at-gmx-web-de-mail-com-4451223253"},
+  {"found":"2026-08-17","title":"Data Analyst (m/w/d) – The Data School (training programme)","company":"The Information Lab","loc":"Hamburg","status":"new","notes":"verify remote claim","url":"https://de.linkedin.com/jobs/view/data-analyst-m-w-d-the-data-school-deutschland-hamburg-at-the-information-lab-deutschland-4450470192"},
+  {"found":"2026-08-17","title":"Junior AI Engineer (w/m/d)","company":"FLEX Capital","loc":"Berlin","status":"new","notes":"adjacent role","url":"https://de.linkedin.com/jobs/view/junior-ai-engineer-w-m-d-at-flex-capital-4450169234"},
+  {"found":"2026-08-17","title":"Junior GenAI Engineer (m/w/d)","company":"Reply","loc":"Berlin","status":"new","notes":"adjacent role","url":"https://de.linkedin.com/jobs/view/junior-genai-engineer-m-w-d-at-reply-4449595026"},
+  {"found":"2026-08-17","title":"Junior GenAI Entwickler:in, remote (m/w/d)","company":"dreifach.ai","loc":"Berlin (remote)","status":"new","notes":"adjacent role","url":"https://de.linkedin.com/jobs/view/junior-genai-entwickler-in-remote-m-w-d-at-dreifach-ai-4452740769"}
+ ]}
+</script>
+<script>
+  const DATA = JSON.parse(document.getElementById('data').textContent);
+  const ORDER = ['new','applied','interview','offer','rejected','skip'];
+  const LABEL = {new:'To review', applied:'Applied', interview:'Interview', offer:'Offer', rejected:'Rejected', skip:'Skipped'};
+  document.getElementById('updated').textContent =
+    'Updated ' + DATA.updated + ' · refreshed with every morning digest';
+
+  const counts = Object.fromEntries(ORDER.map(s=>[s,0]));
+  DATA.rows.forEach(r=>{ counts[r.status] = (counts[r.status]||0)+1; });
+  const tiles = [['Total found', DATA.rows.length],
+    ...ORDER.filter(s=>s!=='skip').map(s=>[LABEL[s], counts[s]||0])];
+  document.getElementById('tiles').innerHTML =
+    tiles.map(([l,n])=>`<div class="tile"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+
+  let filter = 'all';
+  function renderChips(){
+    const chips = [['all','All'], ...ORDER.map(s=>[s,LABEL[s]])];
+    document.getElementById('chips').innerHTML = chips.map(([v,l])=>
+      `<button class="chip${filter===v?' on':''}" data-v="${v}">${l} (${v==='all'?DATA.rows.length:(counts[v]||0)})</button>`).join('');
+    document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{filter=b.dataset.v; renderChips(); renderRows();});
+  }
+  function esc(t){const d=document.createElement('div'); d.textContent=t; return d.innerHTML;}
+  function renderRows(){
+    const rows = DATA.rows.filter(r=>filter==='all'||r.status===filter)
+      .sort((a,b)=>ORDER.indexOf(a.status)-ORDER.indexOf(b.status));
+    document.getElementById('rows').innerHTML = rows.map(r=>
+      `<tr><td><span class="badge s-${r.status}">${LABEL[r.status]||r.status}</span></td>
+       <td><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a></td>
+       <td class="co">${esc(r.company)}</td><td class="loc">${esc(r.loc)}</td>
+       <td class="found">${r.found}</td><td class="loc">${esc(r.notes||'')}</td></tr>`).join('')
+      || '<tr><td colspan="6" style="color:var(--ink-3)">Nothing in this bucket yet.</td></tr>';
+  }
+  renderChips(); renderRows();
+</script>
+</body>
+</html>
