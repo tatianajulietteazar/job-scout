@@ -31,3 +31,10 @@ postings with status `new` and applies status updates from email replies (see
 | 2026-08-17 | Junior AI Engineer (w/m/d) | FLEX Capital | LinkedIn | Berlin | new | 2026-08-17 | adjacent role | [link](https://de.linkedin.com/jobs/view/junior-ai-engineer-w-m-d-at-flex-capital-4450169234) |
 | 2026-08-17 | Junior GenAI Engineer (m/w/d) | Reply | LinkedIn | Berlin | new | 2026-08-17 | adjacent role | [link](https://de.linkedin.com/jobs/view/junior-genai-engineer-m-w-d-at-reply-4449595026) |
 | 2026-08-17 | Junior GenAI Entwickler:in, remote (m/w/d) | dreifach.ai | LinkedIn | Berlin (remote) | new | 2026-08-17 | adjacent role | [link](https://de.linkedin.com/jobs/view/junior-genai-entwickler-in-remote-m-w-d-at-dreifach-ai-4452740769) |
+| 2026-08-17 | Werkstudent (d/m/w) Controlling mit Schwerpunkt Data Science | genua | Indeed | Berlin | new | 2026-08-17 | | [link](https://de.indeed.com/viewjob?jk=a482add581c99039) |
+| 2026-08-17 | Werkstudent:in Datenmanagement, Datenbanken & Automatisierung (SQL/VBA) | BEW Berliner Energie und Wärme | Indeed | Berlin (hybrid) | new | 2026-08-17 | | [link](https://de.indeed.com/viewjob?jk=f5f9477f0973c77d) |
+| 2026-08-17 | Werkstudent:in Sharepoint, Automatisierung & KI | BEW Berliner Energie und Wärme | Indeed | Berlin (hybrid) | new | 2026-08-17 | adjacent role | [link](https://de.indeed.com/viewjob?jk=c0a967b9ddc2e568) |
+| 2026-08-17 | Werkstudent (m/w/d) – Risikomanagement und Banksteuerung | Sparkassen Rating | Indeed | Berlin (hybrid) | new | 2026-08-17 | | [link](https://de.indeed.com/viewjob?jk=b6fbb0a3097ac75e) |
+| 2026-08-17 | Working Student "Packaging Data & Specifications" (w/m/d) | Packmatic | LinkedIn | Berlin (hybrid) | new | 2026-08-17 | | [link](https://de.linkedin.com/jobs/view/4455246219) |
+| 2026-08-17 | Junior Referent (m/w/d) im Bereich Datenmanagement | Wirtschaftsrat der CDU | LinkedIn | Berlin | new | 2026-08-17 | | [link](https://de.linkedin.com/jobs/view/4452267625) |
+| 2026-08-17 | Junior Analyst Öffentliche Finanzen (m/w/d) | Institut für Public Management (IPO-IT) | LinkedIn | Berlin | new | 2026-08-17 | | [link](https://de.linkedin.com/jobs/view/4455253228) |
