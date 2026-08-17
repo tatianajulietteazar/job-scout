@@ -36,6 +36,11 @@ Everything tunable lives in **`routine-prompt.md`** — roles/keywords, location
 recipients, digest format, sources. The scheduled task re-reads it on every run, so an
 edit applies from the next morning. No need to touch the task itself.
 
+**Updating the CV:** drop the new PDF into `application-materials/` — the scout always
+uses the most recently modified PDF there. Interim corrections (new job, new city) go in
+`application-materials/profile-notes.md`, which overrides the CV until the new version
+lands.
+
 ## How to share it / run your own
 
 - **Just receive the digest:** get added to *Email recipients* in `routine-prompt.md`.

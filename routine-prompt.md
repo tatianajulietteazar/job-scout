@@ -17,8 +17,11 @@ local) reads this file at every run and follows it. **Edit this file to change t
 - **Location:** Berlin, or remote within Germany
 - **Window:** last 24 hours
 - **Email recipients:** azartana2@gmail.com, krisi.afezolli@goflink.com
-- **Candidate:** Tatiana Azar — CV at `application-materials/TatianaJAzar_CV.pdf`
-  (gitignored; personal data never gets committed)
+- **Candidate:** Tatiana Azar, based in Berlin — CV = **the most recently modified
+  `*.pdf` in `application-materials/`** (gitignored). To update the CV, just drop the new
+  file in that folder; nothing else to edit. `application-materials/profile-notes.md`
+  holds corrections that override the CV where they conflict (e.g. current role) until a
+  new CV version lands.
 
 ## Rules
 
@@ -66,8 +69,9 @@ Deduplicate by (title, company) across sources.
 ## Cover-letter drafts
 
 For each posting in the **Core** section, draft a tailored cover letter — German or
-English, matching the ad's language — grounded strictly in the candidate's CV. Never
-invent experience, numbers, credentials, or availability. Save each draft to
+English, matching the ad's language — grounded strictly in the candidate's CV (the newest
+PDF in `application-materials/`) plus `profile-notes.md`, with the notes winning on any
+conflict. Never invent experience, numbers, credentials, dates, or availability. Save each draft to
 `applications/<YYYY-MM-DD>/<company>-<role-slug>.md` (gitignored) and append all of the
 day's drafts below the digest in the email.
 
