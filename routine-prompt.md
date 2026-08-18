@@ -86,12 +86,25 @@ Every run, in this order:
 
 ## Cover-letter drafts
 
-For each posting in the **Core** section, draft a tailored cover letter — German or
-English, matching the ad's language — grounded strictly in the candidate's CV (the newest
-PDF in `application-materials/`) plus `profile-notes.md`, with the notes winning on any
-conflict. Never invent experience, numbers, credentials, dates, or availability. Save each draft to
-`applications/<YYYY-MM-DD>/<company>-<role-slug>.md` (gitignored) and append all of the
-day's drafts below the digest in the email.
+For each posting in the **Core** section:
+
+1. **Extract keywords.** Pull 5–10 role-specific terms from the job description — tools,
+   methodologies, domains (e.g. `dbt`, `analytics engineering`, `A/B testing`, `Looker`,
+   `SQL`, `automation`).
+2. **Match against the CV.** Cross-check each term against the candidate's actual CV (the
+   newest PDF in `application-materials/`) and `profile-notes.md`. Keep only terms that
+   genuinely appear there, or are a direct synonym for something that does (e.g. JD says
+   "analytics engineering", CV says "dbt + data modeling" → match). Discard the rest —
+   never add a term the CV doesn't support, even if the JD lists it as required.
+3. **Draft the letter** — German or English, matching the ad's language — weaving the
+   matched terms naturally into the letter using the candidate's own real experience.
+   Never invent experience, numbers, credentials, dates, or availability.
+4. **Note gaps.** List any JD keywords that had no CV match in a short "keyword gaps" line
+   under that posting's row in the digest footer, so the candidate can see at a glance
+   what the ad wants that isn't yet backed by the CV.
+
+Save each draft to `applications/<YYYY-MM-DD>/<company>-<role-slug>.md` (gitignored) and
+append all of the day's drafts below the digest in the email.
 
 **Never submit applications or any other form anywhere — drafting only.** Applying is a
 human step, by design.
